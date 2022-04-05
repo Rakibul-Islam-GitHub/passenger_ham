@@ -162,9 +162,9 @@ export default function Stake(props) {
       poolInfo.poolContractAddress
     ); 
 
-     const [a, b] = await poolContract.userInfo(2, address);
+     const [a, b] = await poolContract.userInfo(3, address);
 
-     const earned = ethers.utils.formatEther(await poolContract.pendingShare(2, address));
+     const earned = ethers.utils.formatEther(await poolContract.pendingShare(3, address));
 
 
  

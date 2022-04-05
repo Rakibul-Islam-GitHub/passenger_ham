@@ -167,7 +167,7 @@ export const unstakeToken = createAsyncThunk(
       deps.PiggyPShareRewardPool.abi,
         signer
     );  
-    const value1 = ethers.utils.parseEther(amount.toString());
+    const value1 = ethers.utils.parseUnits(amount.toString());
     let depositTx;
     let uaData: IUAData = {
       address: address,
@@ -185,7 +185,7 @@ export const unstakeToken = createAsyncThunk(
         // won't run if stakeAllowance > 0
         if(claimFlag)uaData.amount="0";
 
-        depositTx = await poolContract.withdraw(2,uaData.amount);
+        depositTx = await poolContract.withdraw(3,value1);
       
         console.log("Deposit Tnx recieved ere "+depositTx);
 
