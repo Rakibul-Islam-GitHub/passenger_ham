@@ -16,7 +16,7 @@ import ERC20 from "../types/ERC20";
 import { parseEther, parseUnits } from "ethers/lib/utils";
 import Parse from 'parse';
 import { getBestTradeRoute } from "elloswap-sdk";
-import { SwapParameters } from "./interfaces";
+import { SwapParameters, Token } from "./interfaces";
 
 
 export const getSwaps =async(payValue: any)=>{
@@ -87,7 +87,14 @@ export const  getShareStat = async( signer: any, earnTokenName: string,) => {
  
   const priceInFTMZ : SwapParameters | any= await getSwapPrice(DEPS.tShare.address,new bn('1000000000000000'));
  
-  const priceOfSharesInDollars = priceInFTMZ.data.tokens[DEPS.tShare.address].price; 
+
+  let obj  = priceInFTMZ.data.tokens;
+    let price;
+     
+    let addressval = new String(DEPS.tShare.address).toLowerCase()
+    price = obj[addressval].price; 
+
+  const priceOfSharesInDollars = price; 
  
 
   return { 
@@ -108,19 +115,24 @@ export const poolStatistics = async (
   const signer = provider.getSigner();
   const poolContract = new ethers.Contract(
     poolContractAddress,
-      DEPS.ApexAShareRewardPool.abi,
+      DEPS.PiggyPShareRewardPool.abi,
       provider
     );
 
     const depositToken = new ERC20(stakingTokenAddress, signer, depositTokenName, TOKEN.decimals);
 
     const tokensPrice : SwapParameters | any= await getSwaps(new bn('1000000000000000'));
-    const depositTokenPrice = tokensPrice.data.tokens[stakingTokenAddress].price;
+
+    let obj : Token[] = tokensPrice.data.tokens;
+    let price; 
+      price = obj[stakingTokenAddress.toLowerCase()].price; 
+
+    const depositTokenPrice = price;
     const stakeInPool = await depositToken.balanceOf(poolContractAddress);
       const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
       const stat =  await getShareStat(signer,earnTokenName);
-      let tokenPerSecond = await poolContract.AsharePerSecond();
-      tokenPerSecond= tokenPerSecond.mul(450).div(1000);
+      let tokenPerSecond = await poolContract.pSharePerSecond();
+      tokenPerSecond= tokenPerSecond.mul(7e3).div(59500);
       const tokenPerHour = tokenPerSecond.mul(60).mul(60);
       const totalRewardPricePerYear =
         Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));

@@ -99,7 +99,7 @@ export const stakeToken = createAsyncThunk(
     const signer = provider.getSigner();
     const poolContract = new ethers.Contract(
         pool,
-        deps.ApexAShareRewardPool.abi,
+        deps.PiggyPShareRewardPool.abi,
         signer
     );  
     const value1 = ethers.utils.parseEther(amount.toString());
@@ -163,8 +163,8 @@ export const unstakeToken = createAsyncThunk(
 
     const signer = provider.getSigner();
     const poolContract = new ethers.Contract(
-      deps.ApexAShareRewardPool.address,
-      deps.ApexAShareRewardPool.abi,
+      deps.PiggyPShareRewardPool.address,
+      deps.PiggyPShareRewardPool.abi,
         signer
     );  
     const value1 = ethers.utils.parseEther(amount.toString());

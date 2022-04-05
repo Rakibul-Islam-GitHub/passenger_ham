@@ -5565,7 +5565,7 @@ elliptic@6.5.4, elliptic@^6.4.0, elliptic@^6.5.2, elliptic@^6.5.3, elliptic@^6.5
     minimalistic-assert "^1.0.1"
     minimalistic-crypto-utils "^1.0.1"
 
-elloswap-sdk@^1.0.22:
+elloswap-sdk@1.0.22:
   version "1.0.22"
   resolved "https://registry.yarnpkg.com/elloswap-sdk/-/elloswap-sdk-1.0.22.tgz#5aa807944743fcb48e1e3f5d3c7bc4c1bf3142ed"
   integrity sha512-YP3S3+grxbe6CnP0T+p53La+jrCP5NOH9D67ZEp8cqCXV08kKm1kNVH5jqktxVbgNQb2AONAjhszYpTIDOGrMw==

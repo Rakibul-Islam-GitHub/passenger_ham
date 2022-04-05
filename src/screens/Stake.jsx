@@ -136,8 +136,8 @@ export default function Stake(props) {
 
 
     const poolContract = new ethers.Contract(
-      DEPS.ApexAShareRewardPool.address,
-        DEPS.ApexAShareRewardPool.abi,
+      DEPS.PiggyPShareRewardPool.address,
+        DEPS.PiggyPShareRewardPool.abi,
         provider
       );
 
@@ -467,7 +467,7 @@ export default function Stake(props) {
                   );
                 }}
             >
-              Claim & Witthdraw
+              Claim & Withdraw
             </Button>
             </Grid>
           </Paper>
