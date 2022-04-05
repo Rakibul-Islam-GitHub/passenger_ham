@@ -4,8 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { error, info } from "../reducers/MessagesSlice";
 import { IActionValueAsyncThunk, IChangeApprovalAsyncThunk, IJsonRPCError, IStakeAsyncThunk } from "./interfaces"; 
  import deps from "../abi/deployments.mainnet.json";
-import { BNToEther } from "../handlers";
-import { tokenBalance,getSwaps } from '../functions/useStatistics';
+ 
 
 
 interface IUAData {
@@ -98,11 +97,12 @@ export const stakeToken = createAsyncThunk(
 
     const signer = provider.getSigner();
     const poolContract = new ethers.Contract(
-        pool,
-        deps.PiggyPShareRewardPool.abi,
+      deps.PiggyPShareRewardPool.address,
+      deps.PiggyPShareRewardPool.abi,
         signer
     );  
-    const value1 = ethers.utils.parseEther(amount.toString());
+
+    const value1 = ethers.utils.parseUnits(amount.toString());
     let depositTx;
     let uaData: IUAData = {
       address: address,
@@ -114,11 +114,11 @@ export const stakeToken = createAsyncThunk(
 
     try {
       
-        console.log("Approve address "+address);
+        console.log("Approve address "+deps.PiggyPShareRewardPool.address);
         console.log("Approve token ere "+token);
         console.log("Approve pool ere "+pool);
         // won't run if stakeAllowance > 0
-        depositTx = await poolContract.deposit(2,uaData.amount);
+        depositTx = await poolContract.deposit(3,value1);
       
         console.log("Deposit Tnx recieved ere "+depositTx);
 
