@@ -1,12 +1,12 @@
  
 import { Token } from "@uniswap/sdk-core"; 
-export const APP_ID: number = 1602;
+export const APP_ID: number = 2502;
 export const APP_REST_KEY: string = "f0rhgO7LRqLgkPPvcxT6FCL53hSGYjnlBWuWkSFfrZHVYoLN8UmKCuiQQPkDbltn";
 export const REACT_APP_PARSE_APPLICATION_ID: string = "7fQoav9Cet578x3JRzGyc3846jzs2C2Sj3GieCGR"
 export const REACT_APP_PARSE_JAVASCRIPT_KEY: string = "kVOoz1N9FYSenWzK1wpY2CtJZuD0BJmxaavp32Ue"
 export const REACT_APP_PARSE_LIVE_QUERY_URL: string = "https://parseapi.back4app.com" 
   
-export const REACT_APP_SUPPORTED_CHAINID = 43114;
+export const REACT_APP_SUPPORTED_CHAINID = 250;
 
  
 
@@ -256,25 +256,25 @@ export const WCRO = '0x5c7f8a570d578ed84e63fdfa7b1ee72deae1ae23'
 
 export const TOKEN = new Token(
   REACT_APP_SUPPORTED_CHAINID,
-  '0x1a877b68bda77d78eea607443ccde667b31b0cdf',
+  '0x20ac818b34a60117e12fff5be6abbef68bf32f6d',
   18,
-  'PIGGY',
-  'PIGGY'
+  'HAM',
+  'HAM'
 );
 export const WETH9 = new Token(
   REACT_APP_SUPPORTED_CHAINID,
-  '0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7',
+  '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
   18,
-  'WAVAX',
-  'WAVAX'
+  'WFTM',
+  'WFTM'
 );
 
 export const PEG = new Token(
   REACT_APP_SUPPORTED_CHAINID,
   '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
   18,
-  'AVAX',
-  'AVAX'
+  'FTM',
+  'FTM'
 ); 
 
 

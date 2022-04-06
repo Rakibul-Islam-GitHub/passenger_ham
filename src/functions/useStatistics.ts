@@ -115,7 +115,7 @@ export const poolStatistics = async (
   const signer = provider.getSigner();
   const poolContract = new ethers.Contract(
     poolContractAddress,
-      DEPS.PiggyPShareRewardPool.abi,
+      DEPS.HamSingleStakeHShareReward.abi,
       provider
     );
 
@@ -131,8 +131,8 @@ export const poolStatistics = async (
     const stakeInPool = await depositToken.balanceOf(poolContractAddress);
       const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
       const stat =  await getShareStat(signer,earnTokenName);
-      let tokenPerSecond = await poolContract.pSharePerSecond();
-      tokenPerSecond= tokenPerSecond.mul(7e3).div(59500);
+      let tokenPerSecond = await poolContract.hSharePerSecond();
+      tokenPerSecond= tokenPerSecond.div(5);
       const tokenPerHour = tokenPerSecond.mul(60).mul(60);
       const totalRewardPricePerYear =
         Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));

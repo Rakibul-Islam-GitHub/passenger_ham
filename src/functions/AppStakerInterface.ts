@@ -97,8 +97,8 @@ export const stakeToken = createAsyncThunk(
 
     const signer = provider.getSigner();
     const poolContract = new ethers.Contract(
-      deps.PiggyPShareRewardPool.address,
-      deps.PiggyPShareRewardPool.abi,
+      deps.HamSingleStakeHShareReward.address,
+      deps.HamSingleStakeHShareReward.abi,
         signer
     );  
 
@@ -114,11 +114,11 @@ export const stakeToken = createAsyncThunk(
 
     try {
       
-        console.log("Approve address "+deps.PiggyPShareRewardPool.address);
+        console.log("Approve address "+deps.HamSingleStakeHShareReward.address);
         console.log("Approve token ere "+token);
         console.log("Approve pool ere "+pool);
         // won't run if stakeAllowance > 0
-        depositTx = await poolContract.deposit(3,value1);
+        depositTx = await poolContract.deposit(2,value1);
       
         console.log("Deposit Tnx recieved ere "+depositTx);
 
@@ -163,8 +163,8 @@ export const unstakeToken = createAsyncThunk(
 
     const signer = provider.getSigner();
     const poolContract = new ethers.Contract(
-      deps.PiggyPShareRewardPool.address,
-      deps.PiggyPShareRewardPool.abi,
+      deps.HamSingleStakeHShareReward.address,
+      deps.HamSingleStakeHShareReward.abi,
         signer
     );  
     const value1 = ethers.utils.parseUnits(amount.toString());
@@ -185,7 +185,7 @@ export const unstakeToken = createAsyncThunk(
         // won't run if stakeAllowance > 0
         if(claimFlag)uaData.amount="0";
 
-        depositTx = await poolContract.withdraw(3,value1);
+        depositTx = await poolContract.withdraw(2,value1);
       
         console.log("Deposit Tnx recieved ere "+depositTx);
 

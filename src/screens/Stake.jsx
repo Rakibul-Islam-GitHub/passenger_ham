@@ -103,7 +103,7 @@ export default function Stake(props) {
   };
 
   const onClaimToken = async (token, amount, pool) => {      
-      const claimFlag=false;
+      const claimFlag=true;
 
     await dispatch(
         unstakeToken({ token, amount, pool, provider, address, notifications ,claimFlag })
@@ -136,8 +136,8 @@ export default function Stake(props) {
 
 
     const poolContract = new ethers.Contract(
-      DEPS.PiggyPShareRewardPool.address,
-        DEPS.PiggyPShareRewardPool.abi,
+      DEPS.HamSingleStakeHShareReward.address,
+        DEPS.HamSingleStakeHShareReward.abi,
         provider
       );
 
@@ -162,9 +162,9 @@ export default function Stake(props) {
       poolInfo.poolContractAddress
     ); 
 
-     const [a, b] = await poolContract.userInfo(3, address);
+     const [a, b] = await poolContract.userInfo(2, address);
 
-     const earned = ethers.utils.formatEther(await poolContract.pendingShare(3, address));
+     const earned = ethers.utils.formatEther(await poolContract.pendingShare(2, address));
 
 
  
