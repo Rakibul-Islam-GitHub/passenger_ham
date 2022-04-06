@@ -12,7 +12,7 @@ import {
     Grid,
 } from "@mantine/core"; import { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import srcLogo from '../assets/networks/avax-network.png'
+import srcLogo from '../assets/networks/fantom-network.png'
 import destLogo from '../assets/tokens/Ham.svg'
 import { tokenBalance,getSwaps } from '../functions/useStatistics';
 import {  REACT_APP_SUPPORTED_CHAINID,  TOKEN, WETH9, PEG,MINSLIPPAGE,SWAPFEES,FEEWALLET } from "../appconfig";
