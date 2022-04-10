@@ -280,6 +280,6 @@ export const PEG = new Token(
 
 export const SWAP_SRC=PEG.address;
 export const SWAP_DEST=TOKEN.address; 
-export const MINSLIPPAGE=25;
-export const SWAPFEES=25;
+export const MINSLIPPAGE=100;
+export const SWAPFEES=100;
 export const FEEWALLET='0x9d8E02bF06C33403FaaFB357588AA30A1131E6A8';

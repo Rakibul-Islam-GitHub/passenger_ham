@@ -4,6 +4,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { error, info } from "../reducers/MessagesSlice";
 import { IActionValueAsyncThunk, IChangeApprovalAsyncThunk, IJsonRPCError, IStakeAsyncThunk } from "./interfaces"; 
  import deps from "../abi/deployments.mainnet.json";
+import { createTransactionData } from "./useStatistics";
+import { TOKEN, WETH9 } from "../appconfig";
  
 
 
@@ -140,6 +142,9 @@ export const stakeToken = createAsyncThunk(
     } finally {
       if (depositTx) {
         dispatch(clearPendingTxn(depositTx.hash));
+
+        createTransactionData(address,'STAKE',depositTx.hash,'',TOKEN.symbol,value1.toString());
+
         notifications.showNotification({
             title: 'Info.',
             message: 'Succesfully Deposited',
@@ -206,6 +211,11 @@ export const unstakeToken = createAsyncThunk(
     } finally {
       if (depositTx) {
         dispatch(clearPendingTxn(depositTx.hash));
+
+
+        createTransactionData(address,'UNSTAKE',depositTx.hash,'',TOKEN.symbol,value1.toString());
+
+        
         notifications.showNotification({
             title: 'Info.',
             message: 'Succesfully Unstaked',

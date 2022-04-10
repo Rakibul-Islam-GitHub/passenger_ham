@@ -230,3 +230,28 @@ const  getTokenPriceFrom1Inch = async(bombToken: ethers.Contract)=> {
    
 }
 
+
+
+
+export async function createTransactionData(address: any,tnxtype: any,transaction: any,SRCCONTRACT: any,DESTCONTRACT: any,amountInBn: any){
+
+
+
+  const myNewObject: Parse.Object = new Parse.Object('UserTransactions');
+  myNewObject.set('Address', address);
+  myNewObject.set('Type', tnxtype); 
+  myNewObject.set('TnxHash', transaction);
+  myNewObject.set('FromToken',SRCCONTRACT);
+  myNewObject.set('ToToken', DESTCONTRACT);
+  myNewObject.set('AmountInUsd', 'A string');
+  myNewObject.set('Amount', amountInBn);
+  myNewObject.set('Currency', SRCCONTRACT);
+  try {
+    const result: Parse.Object = await myNewObject.save();
+    // Access the Parse Object attributes using the .GET method
+    console.log('UserTransactions created', result);
+  } catch (error: any) {
+    console.error('Error while creating UserTransactions: ', error);
+  }
+
+}

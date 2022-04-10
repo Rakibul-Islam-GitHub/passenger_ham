@@ -14,7 +14,7 @@ import {
 import { ethers } from "ethers";
 import srcLogo from '../assets/networks/fantom-network.png'
 import destLogo from '../assets/tokens/Ham.svg'
-import { tokenBalance,getSwaps } from '../functions/useStatistics';
+import { tokenBalance,getSwaps,createTransactionData } from '../functions/useStatistics';
 import {  REACT_APP_SUPPORTED_CHAINID,  TOKEN, WETH9, PEG,MINSLIPPAGE,SWAPFEES,FEEWALLET } from "../appconfig";
 import { useWeb3Context } from "../hooks";
 import ERC20 from "../types/ERC20";
@@ -51,12 +51,11 @@ export default function SingleSwap(props) {
 
         const amountInBn = new BigNumber(payValue).times(10 ** WETH9.decimals);
         const feeInBn = new BigNumber(amountInBn).times(SWAPFEES).div(10000)
-        const amountInAfterFeeInBn = amountInBn.minus(feeInBn) 
-        setLoading(true); 
+        const amountInAfterFeeInBn = amountInBn.minus(feeInBn)  
         const swapdata = await getSwaps(amountInAfterFeeInBn);
         const outputAmount = swapdata.data.outputAmount
         let newMinAmountOut = new BigNumber(outputAmount)
-        newMinAmountOut = newMinAmountOut.div(1 + +MINSLIPPAGE / 100)
+        newMinAmountOut = newMinAmountOut.div(1 + MINSLIPPAGE / 100)
         await setMinAmountOut(newMinAmountOut.integerValue(BigNumber.ROUND_HALF_UP).toFixed())
     
 
@@ -99,16 +98,36 @@ export default function SingleSwap(props) {
                 
                 
                 try{
-                    await contract[methodName](...args, ethValue === '0' ? { from: address } : { value: ethValue, from: address })
+                    setLoading(true);
+                   const transaction =  await contract[methodName](...args, ethValue === '0' ? { from: address } : { value: ethValue, from: address })
+
+
+                   if(transaction){
+                    notifications.showNotification({
+                        color: 'lime',
+                        title: 'Success.',
+                        message: 'Swap executed successfully',
+                    })
+
+                    createTransactionData(address,'SWAP',transaction.hash,SRCCONTRACT.symbol,DESTCONTRACT.symbol,amountInBn.toString())
+
+
+
+                    setLoading(false);
+                       
+                   }
+                   console.log(JSON.stringify(transaction));
                 } 
                 catch(err) {
                     console.log(err);
+                    setLoading(false);
                     notifications.showNotification({
                         color: 'red',
                         title: 'Error.',
-                        message: err.data? err.data.message : err.message,
+                        message: 'Not enough Gas or Not Enough Slippage',
                     })
                 } 
+
 
                 await stats();
             }
