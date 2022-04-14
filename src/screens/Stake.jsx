@@ -217,11 +217,11 @@ export default function Stake(props) {
           <Group position="left" style={{ marginBottom: 5 }}>
             <Image
               style={{ height: 40, width: 40 }}
-              src={stakingTokenLogo}
+              src={'https://polarisfinance.io/static/media/spolar-token.4e22be66.svg'}
               alt="Token image"
             />
             <Title order={4} align={"center"}   style={{color:'#969bd5' }}>
-              Stake {stakingTokenName}
+              Single Stake Apex {stakingTokenName}
             </Title>
           </Group>
           <Group position="apart" style={{ marginBottom: 15 }}>
